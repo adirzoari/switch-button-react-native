@@ -69,11 +69,11 @@ export default class SwitchButton extends Component {
 		onValueChange: () => null
 	};
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-          activeSwitch: 1,
+          activeSwitch: props.initValue || 1,
           sbWidth: 100,
           sbHeight: 44,
           direction: 'ltr',
@@ -81,6 +81,8 @@ export default class SwitchButton extends Component {
         };
 
         this._switchDirection = this._switchDirection.bind(this);
+        this._switchThump = this._switchThump.bind(this)
+        
     }
 
     _switchDirection(direction) {
@@ -94,7 +96,9 @@ export default class SwitchButton extends Component {
         }
         return dir;
     }
-
+    componentWillMount(){
+        this._switchThump()
+    }
     _switchThump(direction) {
         const { onValueChange, disabled } = this.props;
         let dirsign = 1;
